@@ -21,3 +21,15 @@ More popular comands:
 5. Skip test by browser (pytest marks):
 - `@pytest.mark.skip_browser("firefox")`
 - `@pytest.mark.only_browser("chromium")`
+
+6. Псевдоклассы CSS в Рlaywright (https://zimaev.github.io/table-1/)
+- page.locator("td:right-of(td p:text('Software engineer'))")
+- page.locator("td:left-of(td p:text('Software engineer'))")
+- page.locator("td:above(td p:text('Consultant'))")
+- page.locator("td:below(td p:text('Consultant'))")
+- page.locator("td:near(td p:text('Consultant'))") - рядом (в пределах 50 CSS пикселей) с любым из элементов, соответствующих внутреннему селектору (button:near(:text("Username"), 120) соответствует кнопке, которая находится на расстоянии не более 120 пикселей)
+- page.locator("td:below(td p:text('Software engineer'), 100)") - ниже в пределах 100 пикселей
+- page.locator('button:has-text("Log in"), button:has-text("Sign in")').click() - элемент с тегом <button>, которая содержит текст "Log in" или "Sign in"
+- page.locator("button").locator("nth=0").click() - сузить запрос до n-го совпадения, используя локатор nth= (Первый элемент)
+- page.locator("button").locator("nth=-1").click() - Последний элемент
+- page.locator("button:visible").click() - :visible, псевдокласс в CSS-селекторах для выбора видимого элемента
