@@ -38,3 +38,23 @@ More popular comands:
 вы можете выбрать конкретный элемент из списка с помощью `locator.first`, `locator.last` или `locator.nth(index)`.
 Если вам необходимо узнать количество элементов, соответствующих указанному селектору - используйте метод `count()`. Пример:
 ``page.get_by_role("button").count()``
+
+8. Playwright поставляется со встроенными механизмами ожидания
+Attached - элемент присоединен к DOM. Элемент считается прикрепленным, если он подключен к DOM или ShadowRoot.
+Editable - элемент редактируемый. Элемент считается редактируемым, если он включен и у него не установлено свойство "read only".
+Enabled - элемент включен. Считается включенным, если у тегов button, select, input, textare не имеют свойства disabled.
+Receive Events - получает события, не заслоняемые другими элементами.
+Stable - элемент стабилен. Элемент считается стабильным, если он сохраняет ту же  область после двух или более последовательных кадров анимации.
+Visible -  элемент является видимым.
+
+Явное ожидание элемента: `page.wait_for_selector()`
+
+9. Ввод текста и клик
+- `locator.click(**kwargs)`
+`click(button='right')` - <"левая"|"правая"|"средняя">
+`сlick(force=True)` - обходить проверки на возможность действия.
+- `locator.fill(текст, **kwargs)`
+пример - `page.locator("#exampleInputEmail1").fill("admin@example.com")`
+- `locator.type(текст, **kwargs)` - В отличие от  fill(), метод type() передает данные посимвольно.
+пример - `page.locator("#exampleInputEmail1").type("admin@example.com")`
+- `locator.press(key, **kwargs)` - Функциональные клавиши(F1 - F12, Backspace, Tab, Delete, Escape, ArrowDown, End, Enter, Home, Insert, PageDown, PageUp, ArrowRight, ArrowUp и так далее.)

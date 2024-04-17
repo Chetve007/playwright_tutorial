@@ -69,3 +69,15 @@ def test_locator_elements(browser, how):
             [checkbox.check() for checkbox in checkboxes.all()]
         case 'count':
             [checkboxes.nth(ind).click() for ind in range(checkboxes.count())]
+
+
+@pytest.mark.parametrize('action', ('fill', 'type'))
+def test_check_input_data(browser, action):
+    browser.goto('https://ya.ru/')
+    locator = browser.get_by_placeholder('Найдётся всё')
+    data = 'Саратов'
+    if action == 'fill':
+        locator.fill(data)
+    else:
+        locator.type(data)
+    locator.press('Enter')
