@@ -81,3 +81,44 @@ def test_check_input_data(browser, action):
     else:
         locator.type(data)
     locator.press('Enter')
+
+
+@pytest.mark.parametrize('action', ('check', 'click'))
+def test_checkbox(browser, action):
+    browser.goto('https://zimaev.github.io/checks-radios/')
+
+    def_checkbox_locator = browser.locator("text=Default checkbox")
+    check_checkbox_locator = browser.locator("text=Checked checkbox")
+    def_radio_locator = browser.locator("text=Default radio")
+    check_radio_locator = browser.locator("text=Default checked radio")
+    switch_locator = browser.locator("text=Checked switch checkbox input")
+
+    def_checkbox_locator.check() if action == 'check' else def_checkbox_locator.click()
+    check_checkbox_locator.check() if action == 'check' else check_checkbox_locator.click()
+    def_radio_locator.check() if action == 'check' else def_radio_locator.click()
+    check_radio_locator.check() if action == 'check' else check_radio_locator.click()
+    switch_locator.check() if action == 'check' else switch_locator.click()
+
+
+def test_select(browser):
+    """
+    - index - опции для выбора по индексу.В python, как и в любом языке программирования, индексы начинаются с ноля.
+    По этому чтобы выбрать опцию - Предложил новую функцию, нужно указать индекс 1.
+    - value - для выбора по значению атрибута value.
+    - label - выбор по текстовому значению.
+
+    По умолчанию используется поиск по value. Вы можете использовать синтаксис, без явного указания стратегии поиска.
+    browser.select_option('#floatingSelect', "3")
+    """
+    browser.goto('https://zimaev.github.io/select/')
+    browser.select_option('#floatingSelect', value="3")
+    browser.select_option('#floatingSelect', index=1)
+    browser.select_option('#floatingSelect', label="Нашел и завел bug")
+
+
+def test_select_multiple(browser):
+    """Если в вашем приложении реализован множественный выбор в выпадающем списке, то для реализации данного сценария
+    необходимо передать массив опций, который требуется выбрать.
+    """
+    browser.goto('https://zimaev.github.io/select/')
+    browser.select_option('#skills', value=["playwright", "python"])
