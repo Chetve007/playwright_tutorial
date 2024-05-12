@@ -15,8 +15,10 @@ def browser():
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch(headless=False, slow_mo=1000)  # channel="msedge or chrome",
         context = browser.new_context()  # создает изолированный сеанс браузера (viewport={"width": 800, "height": 600})
+        context.tracing.start(screenshots=True, snapshots=True)  # for tracing
         page = context.new_page()
         yield page
+        context.tracing.stop(path="trace.zip")  # for tracing
         context.storage_state(path="storage_state")
         page.close()
         context.close()
